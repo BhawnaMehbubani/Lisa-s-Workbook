@@ -1,0 +1,43 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int n,k,count=0,p=1;
+    cin>>n>>k;
+    int t[n];
+    for(int i=0;i<n;i++)
+        cin>>t[i];
+    for(int i=0;i<n;i++)
+    {
+        int extra=t[i]%k,tmp;
+        if(extra>0)
+        tmp=(t[i]/k)+1;
+        else
+            tmp=t[i]/k;
+        int q=0;
+        for(int j=p;j<p+tmp;j++)
+        {
+            if(t[i]>=k)
+            {
+            if(j>q && j<=q+k)
+                count++;
+            q=q+k;
+            t[i]=t[i]-k;
+            }
+            else
+            {
+              if(j>q && j<=q+t[i])
+                count++;
+            }
+
+        }
+        p=p+tmp;
+    }
+    cout<<count;
+    return 0;
+}
